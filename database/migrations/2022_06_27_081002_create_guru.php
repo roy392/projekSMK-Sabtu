@@ -15,6 +15,17 @@ return new class extends Migration
     {
         Schema::create('guru', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_guru');
+            $table->string('nip');
+            $table->string('tempat_lahir');
+            $table->string('tanngal_lahir');
+            $table->string('jenis_kelamin');
+            $table->string('alamat');
+            $table->string('no_ktp');
+            $table->string('status_keluarga');
+            $table->string('id_jabatan');
+            $table->string('foto');
+            $table->string('status_pegawai');
             $table->timestamps();
         });
     }
