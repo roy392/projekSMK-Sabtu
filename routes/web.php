@@ -1,11 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\FacadesDB;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Tahun_ajaranController;
 use Illuminate\Http\Request;
 
-Route::get('/', 'UserController@index')->name('userhome');
+
+Route::get('/', [UserController::class, 'index'])->name('home');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
 Route::prefix('admin')->group(function () {
-    Route::get('/', 'AdminController@index')->name('adminhome');
+    Route::get('/admin', 'AdminController@index')->name('adminhome');
 
 
     // Mata Pelajaran
@@ -26,4 +34,28 @@ Route::prefix('admin')->group(function () {
     Route::get('/caritahun_ajaran/{id}', 'Tahun_ajaranController@gettahun_ajaran'); //mencari data 
     Route::post('/edittahun_ajaran/{id}', 'Tahun_ajaranController@update');
     Route::get('/hapusDatatahun_ajaran/{id}', 'Tahun_ajaranController@delete');
+
+    //guru
+    Route::get('/guru', 'GuruController@index')->name('dataguru');
+    Route::get('/dataguru', 'GuruController@get')->name('daftarguru');
+    Route::post('/simpanguru', 'GuruController@save')->name('simpanDataguru');
+    Route::get('/cariguru/{id}', 'GuruController@getguru'); //mencari data
+    Route::post('/editguru/{id}', 'GuruController@update');
+    Route::get('/hapusDataguru/{id}', 'GuruController@delete');
+
+    //siswa
+    Route::get('/siswa', 'SiswaController@index')->name('datasiswa');
+    Route::get('/datasiswa', 'SiswaController@get')->name('daftarsiswa');
+    Route::post('/simpansiswa', 'SiswaController@save')->name('simpanDatasiswa');
+    Route::get('/carisiswa/{id}', 'SiswaController@getsiswa'); //mencari data
+    Route::post('/editsiswa/{id}', 'SiswaController@update');
+    Route::get('/hapusDatasiswa/{id}', 'SiswaController@delete');
+
+    //profile_sekolah
+    Route::get('/profile_sekolah', 'Profile_sekolahController@index')->name('dataprofile_sekolah');
+    Route::get('/dataprofile_sekolah', 'Profile_sekolahController@get')->name('daftarprofile_sekolah');
+    Route::post('/simpanprofile_sekolah', 'Profile_sekolahController@save')->name('simpanDataprofile_sekolah');
+    Route::get('/cariprofile_sekolah/{id}', 'Profile_sekolahController@getprofile_sekolah'); //mencari data
+    Route::post('/editprofile_sekolah/{id}', 'Profile_sekolahController@update');
+    Route::get('/hapusDataprofile_sekolah/{id}', 'Profile_sekolahController@delete');
 });
