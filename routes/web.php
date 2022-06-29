@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\FacadesDB;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MatpelController;
 use App\Http\Controllers\Tahun_ajaranController;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ Route::prefix('admin')->group(function () {
 
 
     // Mata Pelajaran
-    Route::get('/matpel3', 'MatpelController@index')->name('dataMatpel');
+    Route::get('/matpel3', [MatpelController::class, 'index'])->name('dataMatpel');
     Route::get('/dataMatpel', 'MatpelController@get')->name('daftarMatpel');
     Route::post('/simpanMatpel', 'MatpelController@save')->name('simpanDataMatpel');
     Route::get('/cariMatpel/{id}', 'MatpelController@getMatpel'); //mencari data 
@@ -28,7 +29,7 @@ Route::prefix('admin')->group(function () {
     //Route::get('/cariURLMatpel/{id}/{id2}/{id3}', 'MatpelController@getURLMatpel');
 
     //tahun_ajaran
-    Route::get('/tahun_ajaran', 'Tahun_ajaranController@index')->name('datatahun_ajaran');
+    Route::get('/tahun_ajaran', [Tahun_ajaranController::class, 'index'])->name('datatahun_ajaran');
     Route::get('/datatahun_ajaran', 'Tahun_ajaranController@get')->name('daftartahun_ajaran');
     Route::post('/simpantahun_ajaran', 'Tahun_ajaranController@save')->name('simpanDatatahun_ajaran');
     Route::get('/caritahun_ajaran/{id}', 'Tahun_ajaranController@gettahun_ajaran'); //mencari data 
